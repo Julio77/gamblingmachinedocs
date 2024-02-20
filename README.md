@@ -41,6 +41,7 @@ Content-Type: application/json
   "pass": "password123"
 }
 
+```
 ## Registro de Usuario
 
 Este endpoint se utiliza para registrar un nuevo usuario en el sistema.
@@ -68,5 +69,6 @@ Content-Type: application/json
   "email": "john@example.com",
   "password": "password123"
 }
+```
 
 
