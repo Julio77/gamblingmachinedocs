@@ -175,8 +175,8 @@ Este endpoint se utiliza para jugar en una máquina de juego específica, movien
 ### Ejemplo de solicitud:
 
 ```http
-POST /gamblingmachine/123/play
-Authorization: Bearer <token JWT>
+POST /gamblingmachine/1/play
+x-access-token: <token JWT>
 Content-Type: application/json
 
 {
