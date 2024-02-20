@@ -89,7 +89,7 @@ Content-Type: application/json
 
 ```
 
-## Obtener Balance de Máquina de Juego
+## Obtener Balance SPS del usuario en el contexto de Máquinas de Juego
 
 Este endpoint se utiliza para obtener el balance en las maquinitas de juego de un usuario específico.
 
