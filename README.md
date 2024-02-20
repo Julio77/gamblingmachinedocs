@@ -164,7 +164,7 @@ Este endpoint se utiliza para jugar en una máquina de juego específica, movien
 - **Método:** POST
 - **Autenticación requerida:** Sí, se requiere autenticación JWT.
 - **Parámetros de ruta:** 
-  - `id`: ID de la máquina de juego en la que se desea jugar.
+  - `id`: ID de la máquina de juego en la que se desea jugar (NFT ID).
 - **Parámetros de entrada en el cuerpo de la solicitud:** 
   - `player`: Dirección del jugador que está jugando.
   - `serverAddress`: Dirección del servidor que controla la máquina de juego.
