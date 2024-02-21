@@ -208,7 +208,7 @@ Content-Type: application/json
 Este endpoint se utiliza para obtener el saldo aprobado de SPS en el contrato de las maquinitas (spender).
 
 - **Ruta:** `/user/:id/allowancespsgamblingmachine`
-- **Método:** POST
+- **Método:** GET
 - **Autenticación requerida:** Sí, se requiere autenticación JWT.
 - **Parámetros de ruta:** 
   - `id`: Dirección del usuario del que se desea obtener el saldo aprobado.
