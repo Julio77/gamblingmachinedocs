@@ -203,6 +203,87 @@ Content-Type: application/json
 }
 ```
 
+## Obtener Saldo Aprobado de SPS en el Contrato de las Maquinitas
+
+Este endpoint se utiliza para obtener el saldo aprobado de SPS en el contrato de las maquinitas (spender).
+
+- **Ruta:** `/user/:id/allowancespsgamblingmachine`
+- **Método:** POST
+- **Autenticación requerida:** Sí, se requiere autenticación JWT.
+- **Parámetros de ruta:** 
+  - `id`: Dirección del usuario del que se desea obtener el saldo aprobado.
+- **Parámetros de consulta (query parameters):** 
+  - `nid`: ID de la red blockchain.
+- **Respuesta exitosa (200 OK):** Retorna el saldo aprobado de SPS convertido a Ether.
+- **Respuesta de error (códigos de estado HTTP 4xx o 5xx):** Mensaje de error en caso de que ocurra un problema al obtener el saldo aprobado.
+
+### Ejemplo de solicitud:
+
+```http
+POST /user/0x123456789abc/allowancespsgamblingmachine?nid=1
+x-access-token: <token JWT>
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "approvedBalance": "0.5" // Saldo aprobado en tokens ERC20 convertido a Ether
+}
+
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json
+{
+  "message": "Error al obtener el saldo aprobado en el contrato. Por favor, inténtalo de nuevo más tarde."
+}
+```
+
+## Aprobar Saldo de SPS en el Contrato de las Maquinitas (Spender)
+
+Este endpoint se utiliza para aprobar saldo de SPS en el Contrato de las Maquinita (spender).
+
+- **Ruta:** `/user/:id/approvespsgamblingmachine`
+- **Método:** POST
+- **Autenticación requerida:** Sí, se requiere autenticación JWT.
+- **Parámetros de ruta:** 
+  - `id`: Dirección del usuario que aprueba el saldo.
+- **Parámetros de cuerpo (body parameters):** 
+  - `amount`: Cantidad de tokens a aprobar.
+- **Parámetros de consulta (query parameters):** 
+  - `nid`: ID de la red blockchain.
+- **Respuesta exitosa (200 OK):** Retorna el recibo de la transacción si la aprobación es exitosa.
+- **Respuesta de error (códigos de estado HTTP 4xx o 5xx):** Mensaje de error en caso de que ocurra un problema al aprobar el saldo.
+
+### Ejemplo de solicitud:
+
+```http
+POST /user/0x123456789abc/approvespsgamblingmachine?nid=1
+x-access-token: <token JWT>
+Content-Type: application/json
+{
+  "amount": "100000000000" // 1000 SPS
+}
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "transactionReceipt": {
+    "transactionHash": "0xabcdef123456...",
+    "blockNumber": 1234567,
+    "gasUsed": 21000,
+    ...
+  }
+}
+
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json
+{
+  "message": "Error al aprobar el saldo en el contrato. Por favor, inténtalo de nuevo más tarde."
+}
+```
+
+
+
+
+
 
 
 
