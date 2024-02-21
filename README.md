@@ -220,7 +220,7 @@ Este endpoint se utiliza para obtener el saldo aprobado de SPS en el contrato de
 ### Ejemplo de solicitud:
 
 ```http
-POST /user/0x123456789abc/allowancespsgamblingmachine?nid=1
+GET /user/0x123456789abc/allowancespsgamblingmachine?nid=1
 x-access-token: <token JWT>
 
 HTTP/1.1 200 OK
