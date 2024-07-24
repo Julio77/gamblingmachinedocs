@@ -123,9 +123,9 @@ Content-Type: application/json
 
 ```
 
-## Obtener Listado de Máquinas de Juego Activas
+## Obtener Listado de NFTs de Juego Activas
 
-Este endpoint se utiliza para obtener el listado de máquinas de juego activas, devolviendo un array con los IDs de los NFTs listados en las máquinas de juego.
+Este endpoint se utiliza para obtener el listado de NFTs de juego activas, devolviendo un array con los IDs de los NFTs y su tipo de coleccion (Llamar nftTypes() para obtener el listado de colecciones NFT disponibles e identificar los codigos).
 
 - **Ruta:** `/gamblingmachine/active`
 - **Método:** GET
@@ -143,9 +143,18 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 [
-  "1",
-  "2",
-  "3"
+  {
+    id: 1, // ID del NFT
+    balance: 500000, // Balance ERC20
+    nameCoin: 'SPS Coin', // nombre coin
+    nftType: 0 // que coleccion es, Slot, Poker, etc
+  },
+  {
+    id: 1, // ID del NFT
+    balance: 100000, // Balance ERC20
+    nameCoin: 'SPS Coin', // nombre coin
+    nftType: 1 // que coleccion es, Slot, Poker, etc
+  },
 ]
 
 HTTP/1.1 500 Internal Server Error
@@ -156,7 +165,7 @@ Content-Type: application/json
 }
 ```
 
-## Jugar en la Máquina de Juego
+## Realizar Juego - Ejecutar juego en Blockchain
 
 Este endpoint se utiliza para jugar en una máquina de juego específica, moviendo los fondos en el lado del servidor.
 
@@ -166,9 +175,10 @@ Este endpoint se utiliza para jugar en una máquina de juego específica, movien
 - **Parámetros de ruta:** 
   - `id`: ID de la máquina de juego en la que se desea jugar (NFT ID).
 - **Parámetros de entrada en el cuerpo de la solicitud:** 
-  - `player`: Dirección del jugador que está jugando.
+  - `players`: Array de direcciones de jugadores que están jugando.
   - `serverAddress`: Dirección del servidor que controla la máquina de juego.
-  - `newBalance`: Nuevo saldo del jugador después del juego.
+  - `newBalances`: Array de nuevos saldos de los jugadores después del juego.
+  - `nftType`: Tipo de colección NFT (Llamar nftTypes() para obtener el listado de colecciones NFT disponibles)
 - **Respuesta exitosa (200 OK):** Retorna el resultado de la transacción de juego.
 - **Respuesta de error (códigos de estado HTTP 4xx o 5xx):** Mensaje de error en caso de que ocurra un problema durante el juego.
 
@@ -180,19 +190,17 @@ x-access-token: <token JWT>
 Content-Type: application/json
 
 {
-  "player": "0xabc123def456",
+  "players": ["0x...", "0x..."],
   "serverAddress": "0x123456789abc",
-  "newBalance": "1000"
+  "newBalances": [100, 1000],
+  "serverAddress": "0x..."
 }
 
 HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "txHash": "0x123456789",
-  "dealerAddress": "0x123456789abc",
-  "player": "0xabc123def456",
-  "newBalance": "1000"
+  "txHash": "0x123456789"
 }
 
 HTTP/1.1 500 Internal Server Error
@@ -203,7 +211,7 @@ Content-Type: application/json
 }
 ```
 
-## Obtener Saldo Aprobado de SPS en el Contrato de las Maquinitas
+## Obtener Saldo Aprobado de SPS en el Contrato del casino
 
 Este endpoint se utiliza para obtener el saldo aprobado de SPS en el contrato de las maquinitas (spender).
 
@@ -244,7 +252,7 @@ Este endpoint se utiliza para aprobar saldo de SPS en el Contrato de las Maquini
 - **Método:** POST
 - **Autenticación requerida:** Sí, se requiere autenticación JWT.
 - **Parámetros de ruta:** 
-  - `id`: Dirección del usuario que aprueba el saldo.
+  - `:id`: Dirección address del usuario que aprueba el saldo.
 - **Parámetros de cuerpo (body parameters):** 
   - `amount`: Cantidad de tokens a aprobar.
 - **Parámetros de consulta (query parameters):** 
