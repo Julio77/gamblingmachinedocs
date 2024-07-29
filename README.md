@@ -179,6 +179,8 @@ Este endpoint se utiliza para jugar en una máquina de juego específica, movien
   - `serverAddress`: Dirección del servidor que controla la máquina de juego.
   - `newBalances`: Array de nuevos saldos de los jugadores después del juego.
   - `nftType`: Tipo de colección NFT (Llamar nftTypes() para obtener el listado de colecciones NFT disponibles)
+  - `erc20TokenID`: Id del ERC20 en el que se moveran los fondos
+  - `winnerGif`: Valor del premio ganado de un jugador en las mesas de poker, este valor es la sumatoria de premios ganados en la mesa.
 - **Respuesta exitosa (200 OK):** Retorna el resultado de la transacción de juego.
 - **Respuesta de error (códigos de estado HTTP 4xx o 5xx):** Mensaje de error en caso de que ocurra un problema durante el juego.
 
@@ -193,7 +195,9 @@ Content-Type: application/json
   "players": ["0x...", "0x..."],
   "serverAddress": "0x123456789abc",
   "newBalances": [100, 1000],
-  "serverAddress": "0x..."
+  "serverAddress": "0x...",
+  "erc20TokenID": 0,
+  "winnerGif": 100
 }
 
 HTTP/1.1 200 OK
