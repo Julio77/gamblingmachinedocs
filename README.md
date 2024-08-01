@@ -93,18 +93,20 @@ Content-Type: application/json
 
 Este endpoint se utiliza para obtener el balance en las maquinitas de juego de un usuario específico.
 
-- **Ruta:** `/user/:id/gamblingmachinebalance`
+- **Ruta:** `/user/:id/gamblingmachinebalance?erc20Id=0`
 - **Método:** POST
 - **Autenticación requerida:** Sí, se requiere autenticación JWT.
 - **Parámetros de ruta:** 
   - `id`: Direccion Address (Wallet) del usuario para el cual se desea obtener el balance de la máquina de juego.
+- **Parámetros en el queryString:**
+  - `erc20Id`: ID del ERC20 token a jugar
 - **Respuesta exitosa (200 OK):** Retorna el balance de la máquina de juego del usuario en formato Wei, es decir 1 SPS = 100000000.
 - **Respuesta de error (códigos de estado HTTP 4xx o 5xx):** Mensaje de error en caso de que ocurra un problema al obtener el balance.
 
 ### Ejemplo de solicitud:
 
 ```http
-POST /user/0x123abc.../gamblingmachinebalance
+POST /user/0x123abc.../gamblingmachinebalance?erc20Id=0
 x-access-token: <token JWT>
 
 HTTP/1.1 200 OK
